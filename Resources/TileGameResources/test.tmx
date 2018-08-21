@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" source="tmw_desert_spacing.tsx"/>
+ <tileset firstgid="49" source="wood_tileset.tsx"/>
+ <tileset firstgid="305" source="town.tsx"/>
+ <layer name="Grass" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHL+P3DLMdAwVVTVVVVVVVVVVXV5w8/3iD2
+  </data>
+ </layer>
+ <layer name="Path" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1cEJgDAQRcH0JFagViD2Z6lGFPRqcthFZiD3/w5JSgEAAAAAACDKGD2g01rPfB8teUzl6liih3TSkYuOPIbyvFdb8JZWGnJ4N9S/b49d0+4P9/qkIxcduXzpOACM3A/a
+  </data>
+ </layer>
+ <layer name="Trees" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztWrdOBTEQNDWxJ/bEgtQT+4eAn4M/gJKfIvbEQVxhGa9vk+/dIUYaiUN3tnftnd01hBDCI/gEPoMvYbh4Bz/Az++HifGuxYJprH0GnAXnBmzHIta+BC6DKw523IMPgvd3wT1wv3m+Aq8V865j7RvgJriV2KEZ8xV8a36exHhTLb45Bk/A0+b5BrxN3pH6JkVuTAnmYcNCix3n4AV4WXgn9o0WHJ9SWMV3ay3fdqWXHJ9a0JVecnxqgbdecs+PJeZyc1B6qZ2He34sMZebg9JL7Ty1z09XcwwN2nzZN5RymzRXWHJLTUhzRe3cokUuDkv5lhO31trIa8+t+dZaG3nteRf9SUl7vLTauz/JwVpXc1DqT/qEdE+tcWmBpYZP99SjZ4kh0ZuaNXzaP8fg1AYSveFqiubMpP1zDE58SvSGqymaM8Ppn73gqSm168htJneMa/PW8nTuQwFTWzzWpq1z0rnPmKRssaLr2vYg/NhxFP2O8qUk79S6i6I0NGcH5UvvvKMZj9LQUfh9tihfetey3uPFtpTgXctqxitpKVdbOHlHUgNo8lhJS6l40MShd91YQlrLUfHgHdfe9yWlWi6GdxxackrOB9xaThKHnFrG0jtbfCCJw9o9c8kHmvNa+05Q0/No9qp23aTRO2qv7hTf/HWM+27aq89rO4cWOzlrlOoPFZ9t55Abb7naglqj5U6t9t/nJLVFl7WRFP//n9MveN5VfQHSNbEz
+  </data>
+ </layer>
+ <layer name="Path Objects" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1bkNwCAQRUFE7BJcAv3X53wjLCGOZaYCXrD8UgAAAABgjKeufsEYb5KOlqQji5vuI7bu2N5zH7H11L8htvobAOY6YRd72EUAbmK/9/J3vz8bMgLR
+  </data>
+ </layer>
+</map>
