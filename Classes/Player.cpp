@@ -11,6 +11,13 @@ Player::Player(Scene *scene)
 	playerSprite->setPosition(visibleSize.width / 2, visibleSize.height / 7);
 
 	playerX = playerSprite->getPositionX();
+
+	PhysicsBody *playerBody = PhysicsBody::createBox(playerSprite->getContentSize());
+	playerBody->setCollisionBitmask(PLAYER_BITMASK);
+	playerBody->setContactTestBitmask(TRUE);
+
+	playerSprite->setPhysicsBody(playerBody);
+
 	scene->addChild(playerSprite, 1);
 }
 

@@ -28,6 +28,7 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "PlayerMissile.h"
+#include "Definitions.h"
 #include <vector>
 
 USING_NS_CC;
@@ -60,6 +61,8 @@ public:
     
     // a selector callback
     void menuCloseCallback(Ref* pSender);
+
+	bool onContactBegin(PhysicsContact &contact);
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);

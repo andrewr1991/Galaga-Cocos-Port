@@ -10,7 +10,12 @@ PlayerMissile::PlayerMissile(Scene *scene)
 	playerMissileSprite->setScale(0.5);
 	playerMissileSprite->setPosition(1000, 1000);
 
-	//playerMissileY = playerMissileSprite->getPositionY();
+	PhysicsBody *playerMissileBody = PhysicsBody::createBox(playerMissileSprite->getContentSize());
+	playerMissileBody->setCollisionBitmask(PLAYER_MISSILE_BITMASK);
+	playerMissileBody->setContactTestBitmask(TRUE);
+
+	playerMissileSprite->setPhysicsBody(playerMissileBody);
+
 	scene->addChild(playerMissileSprite, 0);
 }
 

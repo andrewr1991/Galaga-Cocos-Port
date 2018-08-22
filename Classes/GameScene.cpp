@@ -27,7 +27,15 @@ THE SOFTWARE.
 
 Scene* GameScene::createScene()
 {
-	return GameScene::create();
+	Scene *scene = Scene::createWithPhysics();
+
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	scene->getPhysicsWorld()->setGravity(Vect(0, 0));
+
+	auto layer = GameScene::create();
+	scene->addChild(layer);
+
+	return scene;
 }
 
 bool GameScene::init()
@@ -49,11 +57,11 @@ bool GameScene::init()
 		playerMissiles.push_back(playerMissile);
 	}
 
-	auto eventListener = EventListenerKeyboard::create();
+	auto eventListenerKeyboard = EventListenerKeyboard::create();
 
 	Director::getInstance()->getOpenGLView()->setIMEKeyboardState(true);
 
-	eventListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event *event)
+	eventListenerKeyboard->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event *event)
 	{
 		if (find(keys.begin(), keys.end(), keyCode) == keys.end())
 		{
@@ -61,15 +69,19 @@ bool GameScene::init()
 		}
 	};
 
-	eventListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event *event)
+	eventListenerKeyboard->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event *event)
 	{
 		keys.erase(find(keys.begin(), keys.end(), keyCode));
 	};
 
-	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(eventListener, this);
+	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(eventListenerKeyboard, this);
 
 	this->scheduleUpdate();
-	
+
+	auto eventContactListener = EventListenerPhysicsContact::create();
+	eventContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
+	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(eventContactListener, this);
+
 	return true;
 }
 
@@ -142,6 +154,20 @@ Vec2 GameScene::cubicBezier(const Vec2& p0, const Vec2& p1, const Vec2& p2, cons
 		t * t * t * p3.y;
 
 	return pFinal;
+}
+
+bool GameScene::onContactBegin(PhysicsContact &contact)
+{
+	PhysicsBody *a = contact.getShapeA()->getBody();
+	PhysicsBody *b = contact.getShapeB()->getBody();
+
+	if ((a->getCollisionBitmask() == PLAYER_BITMASK && b->getCollisionBitmask() == PLAYER_MISSILE_BITMASK) ||
+		(a->getCollisionBitmask() == PLAYER_MISSILE_BITMASK && b->getCollisionBitmask() == PLAYER_BITMASK))
+	{
+		CCLOG("Collision occurred!");
+	}
+
+	return true;
 }
 
 void GameScene::menuCloseCallback(Ref* pSender)

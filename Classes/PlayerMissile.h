@@ -3,6 +3,7 @@
 #define __PLAYER_MISSILE_SCENE_H__
 
 #include "cocos2d.h"
+#include "Definitions.h"
 
 USING_NS_CC;
 using namespace std;
