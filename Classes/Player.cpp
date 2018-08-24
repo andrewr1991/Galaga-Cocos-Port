@@ -7,18 +7,19 @@ Player::Player(Scene *scene)
 
 	playerSprite = Sprite::create("C:/Projects/test/Resources/TileGameResources/player.png");
 
-	playerSprite->setScale(0.5);
+	playerSprite->setScale(SPRITE_SCALE);
 	playerSprite->setPosition(visibleSize.width / 2, visibleSize.height / 7);
 
 	playerX = playerSprite->getPositionX();
 
 	PhysicsBody *playerBody = PhysicsBody::createBox(playerSprite->getContentSize());
+	playerBody->setGroup(-1);
 	playerBody->setCollisionBitmask(PLAYER_BITMASK);
-	playerBody->setContactTestBitmask(TRUE);
+	playerBody->setContactTestBitmask(true);
 
 	playerSprite->setPhysicsBody(playerBody);
 
-	scene->addChild(playerSprite, 1);
+	scene->addChild(playerSprite, PLAYER_Z_ORDER);
 }
 
 Sprite* Player::getPlayerSprite()

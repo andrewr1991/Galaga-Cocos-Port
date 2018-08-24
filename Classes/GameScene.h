@@ -21,14 +21,13 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-
-#ifndef __GAMESCENE_SCENE_H__
-#define __GAMESCENE_SCENE_H__
+#pragma once
 
 #include "cocos2d.h"
 #include "Player.h"
 #include "PlayerMissile.h"
 #include "Definitions.h"
+#include "Enemy.h"
 #include <vector>
 
 USING_NS_CC;
@@ -44,6 +43,7 @@ private:
 	float t;
 	vector<EventKeyboard::KeyCode> keys;
 	Player *player;
+	Enemy *enemy;
 	vector<PlayerMissile*> playerMissiles;
 	float totalGameTime = 0.0;
 	float spaceLastPressed = 0.0;
@@ -67,5 +67,3 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
 };
-
-#endif // __GAMESCENE_SCENE_H__

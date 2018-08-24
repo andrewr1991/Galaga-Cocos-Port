@@ -1,22 +1,24 @@
 #include "PlayerMissile.h"
 
-PlayerMissile::PlayerMissile(Scene *scene)
+PlayerMissile::PlayerMissile(Scene *scene, const int &missileTag)
 {
 	visibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
 
 	playerMissileSprite = Sprite::create("C:/Projects/test/Resources/TileGameResources/player_missile.png");
 
-	playerMissileSprite->setScale(0.5);
-	playerMissileSprite->setPosition(1000, 1000);
+	playerMissileSprite->setScale(SPRITE_SCALE);
+	playerMissileSprite->setPosition(OFFSCREEN_X, OFFSCREEN_Y);
 
 	PhysicsBody *playerMissileBody = PhysicsBody::createBox(playerMissileSprite->getContentSize());
+	playerMissileBody->setGroup(-1);
 	playerMissileBody->setCollisionBitmask(PLAYER_MISSILE_BITMASK);
-	playerMissileBody->setContactTestBitmask(TRUE);
+	playerMissileBody->setContactTestBitmask(true);
+	playerMissileBody->setTag(missileTag);
 
 	playerMissileSprite->setPhysicsBody(playerMissileBody);
 
-	scene->addChild(playerMissileSprite, 0);
+	scene->addChild(playerMissileSprite, PLAYER_MISSILE_Z_ORDER);
 }
 
 Sprite* PlayerMissile::getMissileSprite()

@@ -49,11 +49,12 @@ bool GameScene::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	player = new Player(this);
+	enemy = new Enemy(this);
 
 	// Create 6 player missiles
-	for (int i = 0; i < 6; i++)
+	for (int missileTag = 0; missileTag < 6; missileTag++)
 	{
-		PlayerMissile *playerMissile = new PlayerMissile(this);
+		PlayerMissile *playerMissile = new PlayerMissile(this, missileTag);
 		playerMissiles.push_back(playerMissile);
 	}
 
@@ -120,7 +121,7 @@ void GameScene::update(float delta)
 	// Logic for firing a player missile
 	if (isKeyPressed(EventKeyboard::KeyCode::KEY_SPACE) && ((totalGameTime - spaceLastPressed) >= 0.3))
 	{
-		playerMissiles[missileCounter]->setMissilePosition(player->getPosition().x, player->getPosition().y);
+		playerMissiles[missileCounter]->setMissilePosition(player->getPosition().x, player->getPosition().y); // + ((player->getPlayerSprite()->getContentSize().height / 4) + (playerMissiles[missileCounter]->getMissileSprite()->getContentSize().height / 4)));
 		playerMissiles[missileCounter]->setMissileActive(true);
 		spaceLastPressed = totalGameTime;
 		missileCounter++;
@@ -161,10 +162,17 @@ bool GameScene::onContactBegin(PhysicsContact &contact)
 	PhysicsBody *a = contact.getShapeA()->getBody();
 	PhysicsBody *b = contact.getShapeB()->getBody();
 
-	if ((a->getCollisionBitmask() == PLAYER_BITMASK && b->getCollisionBitmask() == PLAYER_MISSILE_BITMASK) ||
-		(a->getCollisionBitmask() == PLAYER_MISSILE_BITMASK && b->getCollisionBitmask() == PLAYER_BITMASK))
+	if ((a->getCollisionBitmask() == PLAYER_MISSILE_BITMASK && b->getCollisionBitmask() == ENEMY_BITMASK) ||
+		(a->getCollisionBitmask() == ENEMY_BITMASK && b->getCollisionBitmask() == PLAYER_MISSILE_BITMASK))
 	{
-		CCLOG("Collision occurred!");
+		for (int i = 0; i < NUM_PLAYER_MISSILES; i++)
+		{
+			if (a->getTag() == i || b->getTag() == i)
+			{
+				playerMissiles[i]->setMissileActive(false);
+				playerMissiles[i]->setMissilePosition(OFFSCREEN_X, OFFSCREEN_Y);
+			}
+		}
 	}
 
 	return true;

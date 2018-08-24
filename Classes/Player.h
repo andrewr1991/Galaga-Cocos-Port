@@ -1,6 +1,4 @@
 #pragma once
-#ifndef __PLAYER_SCENE_H__
-#define __PLAYER_SCENE_H__
 
 #include "cocos2d.h"
 #include "Definitions.h"
@@ -23,4 +21,3 @@ public:
 	void movePlayer(const float &delta);
 	Vec2 getPosition();
 };
-#endif __PLAYER_SCENE_H__
