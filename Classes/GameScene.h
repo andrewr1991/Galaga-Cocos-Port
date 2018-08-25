@@ -37,6 +37,7 @@ using namespace std;
 class GameScene : public Scene
 {
 private:
+	//static Scene *scene;
 	Vec2 p0;
 	Vec2 p1;
 	Vec2 p2;

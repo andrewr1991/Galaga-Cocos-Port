@@ -178,6 +178,13 @@ bool GameScene::onContactBegin(PhysicsContact &contact)
 		}
 	}
 
+	if ((a->getCollisionBitmask() == PLAYER_BITMASK && b->getCollisionBitmask() == ENEMY_BITMASK) ||
+		(a->getCollisionBitmask() == ENEMY_BITMASK && b->getCollisionBitmask() == PLAYER_BITMASK))
+	{
+		this->removeChild(gameHUD->getLifeSprites().back());
+		this->removeChild(enemy->getEnemySprite());
+	}
+
 	return true;
 }
 

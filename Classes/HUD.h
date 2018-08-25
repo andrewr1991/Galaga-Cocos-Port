@@ -13,10 +13,10 @@ private:
 	Size visibleSize;
 	Vec2 origin;
 	float lifeSpriteX = 0.0;
-	int xPadding = 5;
+	float xPadding = 0.0;
 	int yPadding = 5;
 
 public:
 	GameHUD(Scene *scene);
-	vector<Sprite*> getLifeSprite();
+	vector<Sprite*> getLifeSprites();
 };

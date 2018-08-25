@@ -2,13 +2,15 @@
 
 Enemy::Enemy(Scene *scene)
 {
+	Mode mode = flyIn;
+
 	visibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
 
 	enemySprite = Sprite::create("C:/Projects/test/Resources/TileGameResources/yellow_blue_enemy.png");
 
 	enemySprite->setScale(SPRITE_SCALE);
-	enemySprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	enemySprite->setPosition(OFFSCREEN_X, OFFSCREEN_Y);
 
 	PhysicsBody *enemyBody = PhysicsBody::createBox(enemySprite->getContentSize());
 	enemyBody->setCollisionBitmask(ENEMY_BITMASK);
@@ -33,4 +35,9 @@ void Enemy::moveEnemy(const float &delta)
 Vec2 Enemy::getPosition()
 {
 	return enemySprite->getPosition();
+}
+
+int Enemy::flyInMode(float &delta, float initPosition, float endPosition)
+{
+	return 0;
 }
