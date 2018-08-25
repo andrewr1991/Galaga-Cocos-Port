@@ -50,9 +50,10 @@ bool GameScene::init()
 
 	player = new Player(this);
 	enemy = new Enemy(this);
+	gameHUD = new GameHUD(this);
 
 	// Create 6 player missiles
-	for (int missileTag = 0; missileTag < 6; missileTag++)
+	for (int missileTag = 0; missileTag < NUM_PLAYER_MISSILES; missileTag++)
 	{
 		PlayerMissile *playerMissile = new PlayerMissile(this, missileTag);
 		playerMissiles.push_back(playerMissile);
@@ -105,6 +106,7 @@ void GameScene::update(float delta)
 	totalGameTime += delta;
 
 	// Logic for moving the player to the right
+	// Also give the option to use D or right arrow to move right
 	if (isKeyPressed(EventKeyboard::KeyCode::KEY_D) || isKeyPressed(EventKeyboard::KeyCode::KEY_RIGHT_ARROW))
 	{
 		// Pass positive 'delta' value to move player to the right
@@ -112,6 +114,7 @@ void GameScene::update(float delta)
 	}
 
 	// Logic for moving the player to the left
+	// Also give the option to use A or left arrow to move left
 	if (isKeyPressed(EventKeyboard::KeyCode::KEY_A) || isKeyPressed(EventKeyboard::KeyCode::KEY_LEFT_ARROW))
 	{
 		// Pass negative 'delta' value to move player to the left
@@ -121,7 +124,7 @@ void GameScene::update(float delta)
 	// Logic for firing a player missile
 	if (isKeyPressed(EventKeyboard::KeyCode::KEY_SPACE) && ((totalGameTime - spaceLastPressed) >= 0.3))
 	{
-		playerMissiles[missileCounter]->setMissilePosition(player->getPosition().x, player->getPosition().y); // + ((player->getPlayerSprite()->getContentSize().height / 4) + (playerMissiles[missileCounter]->getMissileSprite()->getContentSize().height / 4)));
+		playerMissiles[missileCounter]->setMissilePosition(player->getPosition().x, player->getPosition().y);
 		playerMissiles[missileCounter]->setMissileActive(true);
 		spaceLastPressed = totalGameTime;
 		missileCounter++;

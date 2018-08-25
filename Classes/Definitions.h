@@ -22,3 +22,8 @@
 
 // Sprite values
 #define SPRITE_SCALE 0.5
+
+// Life sprite values
+#define LIFE_SPRITE_SCALE 0.4
+#define NUM_PLAYER_LIVES 3
+#define PLAYER_LIVES_Z_ORDER 1

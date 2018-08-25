@@ -12,6 +12,8 @@ Player::Player(Scene *scene)
 
 	playerX = playerSprite->getPositionX();
 
+	lives = 3;
+
 	PhysicsBody *playerBody = PhysicsBody::createBox(playerSprite->getContentSize());
 	playerBody->setGroup(-1);
 	playerBody->setCollisionBitmask(PLAYER_BITMASK);
@@ -37,3 +39,4 @@ Vec2 Player::getPosition()
 {
 	return playerSprite->getPosition();
 }
+

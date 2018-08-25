@@ -28,6 +28,7 @@
 #include "PlayerMissile.h"
 #include "Definitions.h"
 #include "Enemy.h"
+#include "HUD.h"
 #include <vector>
 
 USING_NS_CC;
@@ -45,6 +46,7 @@ private:
 	Player *player;
 	Enemy *enemy;
 	vector<PlayerMissile*> playerMissiles;
+	GameHUD *gameHUD;
 	float totalGameTime = 0.0;
 	float spaceLastPressed = 0.0;
 	int missileCounter = 0;

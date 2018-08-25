@@ -14,6 +14,7 @@ private:
 	float playerX = 10.0;
 	Size visibleSize;
 	Vec2 origin;
+	int lives = 0;
 
 public:
 	Player(Scene *scene);
