@@ -85,9 +85,15 @@ bool GameScene::init()
 	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(eventContactListener, this);
 
 	initPosition.set(200, 200);
-	endPosition.set(400, 650);
+	endPosition.set(250, 700);
 
-	enemy->setEnemyPosition(initPosition);
+	p0.setPoint(400.0, 800.0);
+	p1.setPoint(386.0, 663.0);
+	p2.setPoint(50.0, 700.0);
+	p3.setPoint(50.0, 450.0);
+	t = 0.0;
+
+	enemy->setEnemyPosition(p0);
 
 	return true;
 }
@@ -148,22 +154,38 @@ void GameScene::update(float delta)
 			playerMissiles[i]->fireMissile(delta);
 		}
 	}
-	enemy->goToFormation(delta, initPosition, endPosition);
-}
 
-Vec2 GameScene::cubicBezier(const Vec2& p0, const Vec2& p1, const Vec2& p2, const Vec2& p3, float t, Vec2& pFinal)
-{
-	pFinal.x = pow((1 - t), 3) * p0.x +
-		pow((1 - t), 2) * 3 * t * p1.x +
-		(1 - t) * 3 * t * t * p2.x +
-		t * t * t * p3.x;
+	if ((round(enemy->getPosition().y) > round(p3.y)) && enemy->getMode() == 0)
+	{
+		enemy->flyIn(p0, p1, p2, p3, t);
+		t += 0.005;
+	}
 
-	pFinal.y = pow((1 - t), 3) * p0.y +
-		pow((1 - t), 2) * 3 * t * p1.y +
-		(1 - t) * 3 * t * t * p2.y +
-		t * t * t * p3.y;
+	else if ((round(enemy->getPosition().y) == round(p3.y)) && enemy->getMode() == 0)
+	{
+		enemy->setMode(1);
+		t = 0;
+		p0.set(50.0, 450.0);
+		p1.set(50.0, 250.0);
+		p2.set(300.0, 250.0);
+		p3.set(300.0, 500.0);
+	}
 
-	return pFinal;
+	if ((round(enemy->getPosition().x) < round(p3.x)) && enemy->getMode() == 1)
+	{
+		enemy->flyIn(p0, p1, p2, p3, t);
+		t += 0.005;
+	}
+
+	else if ((round(enemy->getPosition().x) == round(p3.x)) && enemy->getMode() == 1)
+	{
+		enemy->setMode(2);
+	}
+
+	if (enemy->getMode() == 2)
+	{
+		enemy->goToFormation(delta, p3, endPosition);
+	}
 }
 
 bool GameScene::onContactBegin(PhysicsContact &contact)
