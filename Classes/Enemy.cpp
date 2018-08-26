@@ -10,7 +10,7 @@ Enemy::Enemy(Scene *scene)
 	enemySprite = Sprite::create("C:/Projects/test/Resources/TileGameResources/yellow_blue_enemy.png");
 
 	enemySprite->setScale(SPRITE_SCALE);
-	enemySprite->setPosition(OFFSCREEN_X, OFFSCREEN_Y);
+	enemySprite->setPosition(100, 200);
 
 	PhysicsBody *enemyBody = PhysicsBody::createBox(enemySprite->getContentSize());
 	enemyBody->setCollisionBitmask(ENEMY_BITMASK);
@@ -21,7 +21,7 @@ Enemy::Enemy(Scene *scene)
 	scene->addChild(enemySprite, ENEMY_Z_ORDER);
 }
 
-Sprite* Enemy::getEnemySprite()
+Sprite* Enemy::getEnemySprite(void)
 {
 	return enemySprite;
 }
@@ -32,12 +32,28 @@ void Enemy::moveEnemy(const float &delta)
 	enemySprite->setPositionX(enemyX);
 }
 
-Vec2 Enemy::getPosition()
+Vec2 Enemy::getPosition(void)
 {
 	return enemySprite->getPosition();
 }
 
-int Enemy::flyInMode(float &delta, float initPosition, float endPosition)
+void Enemy::goToFormation(const float &delta, const Vec2 &initPosition, const Vec2 &endPosition)
 {
-	return 0;
+	if (enemySprite->getPosition().x <= endPosition.x)
+	{
+		enemyPosition.x += (delta * enemySpeed);
+
+		// Calculate slope
+		float m = (endPosition.y - initPosition.y) / (endPosition.x - initPosition.x);
+		enemyPosition.y = (m * enemyPosition.x) - (m * initPosition.x) + initPosition.y;
+		//positionFinal.x = ((y - initPosition.y) + (m * initPosition.x)) / m;
+
+		enemySprite->setPosition(enemyPosition);
+	}
+}
+
+void Enemy::setEnemyPosition(const Vec2 &position)
+{
+	enemyPosition = position;
+	enemySprite->setPosition(enemyPosition);
 }

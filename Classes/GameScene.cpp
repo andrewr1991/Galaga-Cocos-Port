@@ -84,6 +84,11 @@ bool GameScene::init()
 	eventContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
 	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(eventContactListener, this);
 
+	initPosition.set(200, 200);
+	endPosition.set(400, 650);
+
+	enemy->setEnemyPosition(initPosition);
+
 	return true;
 }
 
@@ -143,6 +148,7 @@ void GameScene::update(float delta)
 			playerMissiles[i]->fireMissile(delta);
 		}
 	}
+	enemy->goToFormation(delta, initPosition, endPosition);
 }
 
 Vec2 GameScene::cubicBezier(const Vec2& p0, const Vec2& p1, const Vec2& p2, const Vec2& p3, float t, Vec2& pFinal)
@@ -181,8 +187,8 @@ bool GameScene::onContactBegin(PhysicsContact &contact)
 	if ((a->getCollisionBitmask() == PLAYER_BITMASK && b->getCollisionBitmask() == ENEMY_BITMASK) ||
 		(a->getCollisionBitmask() == ENEMY_BITMASK && b->getCollisionBitmask() == PLAYER_BITMASK))
 	{
-		this->removeChild(gameHUD->getLifeSprites().back());
-		this->removeChild(enemy->getEnemySprite());
+		//this->removeChild(gameHUD->getLifeSprites().back());
+		//this->removeChild(enemy->getEnemySprite());
 	}
 
 	return true;

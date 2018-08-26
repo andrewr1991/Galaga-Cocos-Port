@@ -51,6 +51,9 @@ private:
 	float totalGameTime = 0.0;
 	float spaceLastPressed = 0.0;
 	int missileCounter = 0;
+	vector<int> enemyFormation;
+	Vec2 initPosition;
+	Vec2 endPosition;
 
 public:
     static Scene* createScene();

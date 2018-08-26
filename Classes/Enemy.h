@@ -17,14 +17,16 @@ private:
 	enum Mode 
 	{ 
 	flyIn = 0, 
-	goToFormation = 1, 
+	toFormation = 1, 
 	stayInFormation = 2
 	};
+	Vec2 enemyPosition;
 
 public:
 	Enemy(Scene *scene);
 	Sprite *getEnemySprite();
 	void moveEnemy(const float &delta);
 	Vec2 getPosition();
-	int flyInMode(float &delta, float initPosition, float endPosition);
+	void goToFormation(const float &delta, const Vec2 &initPosition, const Vec2 &endPosition);
+	void setEnemyPosition(const Vec2 &position);
 };

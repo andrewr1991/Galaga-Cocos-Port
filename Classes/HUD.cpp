@@ -21,7 +21,7 @@ GameHUD::GameHUD(Scene *scene)
 	}
 }
 
-vector<Sprite*> GameHUD::getLifeSprites()
+vector<Sprite*> GameHUD::getLifeSprites(void)
 {
 	return lifeSprites;
 }
